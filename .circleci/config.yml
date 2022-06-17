@@ -6,3 +6,15 @@ jobs:
     steps:
       - run: echo "hello world" # run the `echo` command
       - run: curl -X GET "https://beinggithubactions.herokuapp.com/?id=circleci"
+
+workflows:
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 6 * * *"
+           filters:
+             branches:
+               only:
+                 - master
+     jobs:
+       - build
